@@ -21,9 +21,9 @@ function makePageForEpisodes(episodeList) {
 
     // Add the content
     card.innerHTML = `
-      <h2>${episode.name}</h2>
-
-      <p class="code">${episodeCode}</p>
+      <h2>${episode.name}-${episodeCode}</h2>
+      //Implemented the episodename and episodeCode on the same h2 element
+      
 
       <img
         src="${episode.image.medium}"
