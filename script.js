@@ -4,6 +4,7 @@ function setup() {
   makePageForEpisodes(allEpisodes);
   showMatchCount(allEpisodes.length);//get all episodes at once
   const searchInput = document.getElementById("searchInput");
+  
 }
 
 function makePageForEpisodes(episodeList) {
