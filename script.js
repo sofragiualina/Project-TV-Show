@@ -3,9 +3,21 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   showMatchCount(allEpisodes.length);//get all episodes at once
-  const searchInput = document.getElementById("searchInput");
-  
+  const searchInput = document.getElementById("searchInput");//Render the SearchInput in the dom
+  //Attach an input listener to the search box
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const filteredEpisodes = allEpisodes.filter((episode) => {
+      const name = episode.name.toLowerCase();
+      const summary = episode.summary.toLowerCase();
+      return name.includes(query) || summary.includes(query);
+    });
+
+    makePageForEpisodes(filteredEpisodes);
+    showMatchCount(filteredEpisodes.length);
+  });
 }
+
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
