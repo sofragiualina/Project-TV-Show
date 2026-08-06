@@ -33,6 +33,14 @@ function makePageForEpisodes(episodeList) {
       <div class="summary">
         ${episode.summary}
       </div>
+      <a 
+    href="${episode.url}" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="link"
+  >
+    View on TVMaze
+  </a>//implemented the link element for each episodes
     `;
 
     rootElem.appendChild(card);
