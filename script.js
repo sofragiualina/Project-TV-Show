@@ -2,6 +2,7 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
+  showMatchCount(allEpisodes.length);//get all episodes at once
 }
 
 function makePageForEpisodes(episodeList) {
