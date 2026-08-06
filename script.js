@@ -22,7 +22,7 @@ function makePageForEpisodes(episodeList) {
     // Add the content
     card.innerHTML = `
       <h2>${episode.name}-${episodeCode}</h2>
-      //Implemented the episodename and episodeCode on the same h2 element
+      
       
 
       <img
@@ -40,7 +40,7 @@ function makePageForEpisodes(episodeList) {
     class="link"
   >
     View on TVMaze
-  </a>//implemented the link element for each episodes
+  </a>
     `;
 
     rootElem.appendChild(card);
