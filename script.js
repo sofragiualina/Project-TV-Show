@@ -2,23 +2,28 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
-  showMatchCount(allEpisodes.length);//get all episodes at once
+  showMatchCount(allEpisodes.length, allEpisodes.length);//get all episodes at once and display how many match filter, and how many in the dataset
   const searchInput = document.getElementById("searchInput");//Render the SearchInput in the dom
   //Attach an input listener to the search box
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
     const filteredEpisodes = allEpisodes.filter((episode) => {
-      const name = episode.name.toLowerCase();
-      const summary = episode.summary.toLowerCase();
+      const name = (episode.name || "").toLowerCase();
+      const summary = (episode.summary || "").toLowerCase();
       return name.includes(query) || summary.includes(query);
     });
 
     makePageForEpisodes(filteredEpisodes);
-    showMatchCount(filteredEpisodes.length);
+    showMatchCount(filteredEpisodes.length,allEpisodes.length);
   });
 }
-
-
+//Implement the function that  will display episode count
+function showMatchCount(matchCount,totalCount){
+const matchCountElem = document.getElementById("matchCount");
+if (matchCountElem) {
+  matchCountElem.textContent =`Displaying ${matchCount}/${totalCount}`
+}
+}
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
 
