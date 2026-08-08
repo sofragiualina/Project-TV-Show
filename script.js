@@ -3,8 +3,14 @@ function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
   showMatchCount(allEpisodes.length, allEpisodes.length);//get all episodes at once and display how many match filter, and how many in the dataset
+  // populate the drop-down selector options dynamically
+  populateSelector(allEpisodes);
+
+
   const searchInput = document.getElementById("searchInput");//Render the SearchInput in the dom
   //Attach an input listener to the search box
+  // Render the episodeSelector in the DOM
+  const episodesSelector = document.getElementById("episodeSelector");
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase();
     const filteredEpisodes = allEpisodes.filter((episode) => {
