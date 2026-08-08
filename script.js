@@ -17,7 +17,7 @@ function setup() {
 
 
     //Reset selector to default "All episodes" when typing in the search box
-     episodeSelector.value = "all";
+     episodesSelector.value = "all";
 
 
     const query = searchInput.value.toLowerCase();
@@ -32,8 +32,8 @@ function setup() {
   });
 
 // Attach a change listener to the dropdown menu
-  episodeSelector.addEventListener("change", () => {
-    const selectedId = episodeSelector.value;
+  episodesSelector.addEventListener("change", () => {
+    const selectedId = episodesSelector.value;
 
     if (selectedId === "all") {
       searchInput.value = ""; // Clear text box
