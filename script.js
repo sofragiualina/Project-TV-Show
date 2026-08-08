@@ -11,7 +11,15 @@ function setup() {
   //Attach an input listener to the search box
   // Render the episodeSelector in the DOM
   const episodesSelector = document.getElementById("episodeSelector");
+
+  // Attach an input listener to the search box
   searchInput.addEventListener("input", () => {
+
+
+    //Reset selector to default "All episodes" when typing in the search box
+     episodeSelector.value = "all";
+
+
     const query = searchInput.value.toLowerCase();
     const filteredEpisodes = allEpisodes.filter((episode) => {
       const name = (episode.name || "").toLowerCase();
