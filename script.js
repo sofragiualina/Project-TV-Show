@@ -52,6 +52,27 @@ function setup() {
   });
 
 }
+
+// Implement the function that will populate dropdown options
+function populateSelector(episodeList) {
+  const selector = document.getElementById("episodeSelector");
+  if (!selector) return;
+
+  for (const episode of episodeList) {
+    const option = document.createElement("option");
+
+    const season = String(episode.season).padStart(2, "0");
+    const number = String(episode.number).padStart(2, "0");
+    const episodeCode = `S${season}E${number}`;
+
+    option.value = episode.id;
+    option.textContent = `${episodeCode} - ${episode.name}`;
+
+    selector.appendChild(option);
+  }
+}
+
+
 //Implement the function that  will display episode count
 function showMatchCount(matchCount,totalCount){
 const matchCountElem = document.getElementById("matchCount");
