@@ -30,6 +30,11 @@ function setup() {
     makePageForEpisodes(filteredEpisodes);
     showMatchCount(filteredEpisodes.length,allEpisodes.length);
   });
+
+
+
+
+  
 }
 //Implement the function that  will display episode count
 function showMatchCount(matchCount,totalCount){
