@@ -31,10 +31,26 @@ function setup() {
     showMatchCount(filteredEpisodes.length,allEpisodes.length);
   });
 
+// Attach a change listener to the dropdown menu
+  episodeSelector.addEventListener("change", () => {
+    const selectedId = episodeSelector.value;
 
+    if (selectedId === "all") {
+      searchInput.value = ""; // Clear text box
+      makePageForEpisodes(allEpisodes);
+      showMatchCount(allEpisodes.length, allEpisodes.length);
+    } else {
+      searchInput.value = ""; // Clear text box to avoid UI conflict
 
+      // Filter list down to only include the single matching episode ID
+      const singleEpisode = allEpisodes.filter(
+        (episode) => String(episode.id) === selectedId,
+      );
+      makePageForEpisodes(singleEpisode);
+      showMatchCount(singleEpisode.length, allEpisodes.length);
+    }
+  });
 
-  
 }
 //Implement the function that  will display episode count
 function showMatchCount(matchCount,totalCount){
