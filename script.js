@@ -2,8 +2,84 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
+  showMatchCount(allEpisodes.length, allEpisodes.length);//get all episodes at once and display how many match filter, and how many in the dataset
+  // populate the drop-down selector options dynamically
+  populateSelector(allEpisodes);
+
+
+  const searchInput = document.getElementById("searchInput");//Render the SearchInput in the dom
+  //Attach an input listener to the search box
+  // Render the episodeSelector in the DOM
+  const episodesSelector = document.getElementById("episodeSelector");
+
+  // Attach an input listener to the search box
+  searchInput.addEventListener("input", () => {
+
+
+    //Reset selector to default "All episodes" when typing in the search box
+     episodesSelector.value = "all";
+
+
+    const query = searchInput.value.toLowerCase();
+    const filteredEpisodes = allEpisodes.filter((episode) => {
+      const name = (episode.name || "").toLowerCase();
+      const summary = (episode.summary || "").toLowerCase();
+      return name.includes(query) || summary.includes(query);
+    });
+
+    makePageForEpisodes(filteredEpisodes);
+    showMatchCount(filteredEpisodes.length,allEpisodes.length);
+  });
+
+// Attach a change listener to the dropdown menu
+  episodesSelector.addEventListener("change", () => {
+    const selectedId = episodesSelector.value;
+
+    if (selectedId === "all") {
+      searchInput.value = ""; // Clear text box
+      makePageForEpisodes(allEpisodes);
+      showMatchCount(allEpisodes.length, allEpisodes.length);
+    } else {
+      searchInput.value = ""; // Clear text box to avoid UI conflict
+
+      // Filter list down to only include the single matching episode ID
+      const singleEpisode = allEpisodes.filter(
+        (episode) => String(episode.id) === selectedId,
+      );
+      makePageForEpisodes(singleEpisode);
+      showMatchCount(singleEpisode.length, allEpisodes.length);
+    }
+  });
+
 }
 
+// Implement the function that will populate dropdown options
+function populateSelector(episodeList) {
+  const selector = document.getElementById("episodeSelector");
+  if (!selector) return;
+
+  for (const episode of episodeList) {
+    const option = document.createElement("option");
+
+    const season = String(episode.season).padStart(2, "0");
+    const number = String(episode.number).padStart(2, "0");
+    const episodeCode = `S${season}E${number}`;
+
+    option.value = episode.id;
+    option.textContent = `${episodeCode} - ${episode.name}`;
+
+    selector.appendChild(option);
+  }
+}
+
+
+//Implement the function that  will display episode count
+function showMatchCount(matchCount,totalCount){
+const matchCountElem = document.getElementById("matchCount");
+if (matchCountElem) {
+  matchCountElem.textContent =`Displaying ${matchCount}/${totalCount}`
+}
+}
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
 
@@ -21,9 +97,9 @@ function makePageForEpisodes(episodeList) {
 
     // Add the content
     card.innerHTML = `
-      <h2>${episode.name}</h2>
-
-      <p class="code">${episodeCode}</p>
+      <h2>${episode.name}-${episodeCode}</h2>
+      
+      
 
       <img
         src="${episode.image.medium}"
@@ -33,6 +109,14 @@ function makePageForEpisodes(episodeList) {
       <div class="summary">
         ${episode.summary}
       </div>
+      <a 
+    href="${episode.url}" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="link"
+  >
+    View on TVMaze
+  </a>
     `;
 
     rootElem.appendChild(card);
