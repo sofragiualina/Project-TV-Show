@@ -25,19 +25,14 @@
       <option value="all">All episodes</option>
     </select>
     <!-- Search input + match count -->
-    <input
-      id="searchInput"
-     type="text"
-      placeholder="Search episodes"
-     />
+    <input id="searchInput" type="text" placeholder="Search episodes" />
     <p id="matchCount"></p>
-    
 
-    <div 
-    
-    id="root"></div>
+    <p id="statusMessage" aria-live="polite">
+      Loading episodes, please wait...
+    </p>
 
-    <script src="episodes.js"></script>
+    <div id="root"></div>
 
     <script src="script.js"></script>
   </body>
