@@ -1,4 +1,6 @@
 let allEpisodes = [];
+// create a variable allShows to store  all shows  arrays
+let allShows = [];
 
 const API_URL = "https://api.tvmaze.com/shows/82/episodes";
 
