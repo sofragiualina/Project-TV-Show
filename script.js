@@ -4,6 +4,8 @@ let allShows = [];
 const episodesCache = {}; // create  episodes object, so we never re-fetch a show
 
 const SHOWS_URL = "https://api.tvmaze.com/shows";
+const episodesUrl = (showId) =>
+  `https://api.tvmaze.com/shows/${showId}/episodes`;
 
 async function setup() {
   const statusMessage = document.getElementById("statusMessage");
