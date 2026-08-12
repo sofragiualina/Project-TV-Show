@@ -116,6 +116,22 @@ async function loadShow(showId) {
   populateEpisodeSelector(allEpisodes);
 }
 
+// Populate the show dropdown
+function populateShowSelector(showList) {
+  const selector = document.getElementById("showSelector");
+  if (!selector) return;
+
+  selector.innerHTML = "";
+
+  for (const show of showList) {
+    const option = document.createElement("option");
+    option.value = show.id;
+    option.textContent = show.name;
+    selector.appendChild(option);
+  }
+}
+
+
 // Populate the episode dropdown
 function populateSelector(episodeList) {
   const selector = document.getElementById("episodeSelector");
