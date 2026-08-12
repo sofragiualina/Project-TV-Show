@@ -95,6 +95,27 @@ async function setup() {
     showMatchCount(0, 0);
   }
 }
+// Fetch (or reuse cached) episodes for a show, then render them
+async function loadShow(showId) {
+  const searchInput = document.getElementById("searchInput");
+  const episodeSelector = document.getElementById("episodeSelector");
+
+  searchInput.value = "";
+  episodeSelector.value = "all";
+
+  if (!episodesCache[showId]) {
+    const response = await fetch(episodesUrl(showId));
+    if (!response.ok) throw new Error("Failed to load episodes");
+    episodesCache[showId] = await response.json();
+  }
+
+  allEpisodes = episodesCache[showId];
+
+  makePageForEpisodes(allEpisodes);
+  showMatchCount(allEpisodes.length, allEpisodes.length);
+  populateEpisodeSelector(allEpisodes);
+}
+
 // Populate the episode dropdown
 function populateSelector(episodeList) {
   const selector = document.getElementById("episodeSelector");
