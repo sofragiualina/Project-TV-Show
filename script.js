@@ -33,7 +33,7 @@ async function setup() {
 
     // 3. Search functionality (unchanged — operates on current allEpisodes)
     searchInput.addEventListener("input", () => {
-      episodeSelector.value = "all";
+      episodesSelector.value = "all";
 
       const query = searchInput.value.toLowerCase();
 
@@ -130,10 +130,37 @@ function populateShowSelector(showList) {
     selector.appendChild(option);
   }
 }
+function populateEpisodeSelector(episodes) {
+  const selector = document.getElementById("episodeSelector");
+  if (!selector) return;
+
+  // Clear old options
+  selector.innerHTML = "";
+
+  // Add the "All episodes" option first
+  const allOption = document.createElement("option");
+  allOption.value = "all";
+  allOption.textContent = "All Episodes";
+  selector.appendChild(allOption);
+
+  // Add each episode
+  episodes.forEach(({ id, name, season, number }) => {
+    const option = document.createElement("option");
+
+    const seasonCode = String(season).padStart(2, "0");
+    const numberCode = String(number).padStart(2, "0");
+    const episodeCode = `S${seasonCode}E${numberCode}`;
+
+    option.value = id;
+    option.textContent = `${episodeCode} - ${name}`;
+
+    selector.appendChild(option);
+  });
+}
 
 
 // Populate the episode dropdown
-function populateSelector(episodeList) {
+/*function populateSelector(episodeList) {
   const selector = document.getElementById("episodeSelector");
 
   if (!selector) {
@@ -154,7 +181,7 @@ function populateSelector(episodeList) {
 
     selector.appendChild(option);
   }
-}
+}*/
 
 // Display episode count
 function showMatchCount(matchCount, totalCount) {
