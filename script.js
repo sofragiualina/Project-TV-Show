@@ -1,6 +1,7 @@
 let allEpisodes = [];
 // create a variable allShows to store  all shows  arrays
 let allShows = [];
+const episodesCache = {}; // create  episodes object, so we never re-fetch a show
 
 const API_URL = "https://api.tvmaze.com/shows/82/episodes";
 
