@@ -64,6 +64,7 @@ select {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 30px;
+  align-items: stretch;
 }
 
 .show-card,
@@ -74,11 +75,14 @@ select {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .show-card img,
 .episode-card img {
   width: 100%;
+  height: 300px;
+  object-fit: cover;
   display: block;
 }
 
@@ -87,6 +91,10 @@ select {
   background: #dfc8f5;
   padding: 15px;
   text-align: center;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .show-name {
@@ -114,9 +122,11 @@ select {
 }
 
 .summary {
+  height: 150px;
   padding: 15px;
   line-height: 1.5;
-  flex-grow: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .episode-card a {
@@ -128,6 +138,7 @@ select {
   text-align: center;
   text-decoration: none;
   border-radius: 6px;
+  margin-top: auto;
 }
 
 .episode-card a:hover {
