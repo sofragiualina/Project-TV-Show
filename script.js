@@ -12,6 +12,7 @@ async function setup() {
   const episodesView = document.getElementById("episodesView");
   const showsStatus = document.getElementById("showsStatus");
   const showSearch = document.getElementById("showSearch");
+  const showSelector = document.getElementById("showSelector");
   const backToShows = document.getElementById("backToShows");
   const searchInput = document.getElementById("searchInput");
   const episodesSelector = document.getElementById("episodeSelector");
@@ -29,9 +30,23 @@ async function setup() {
 
     showsStatus.textContent = "";
 
+    // Populate the show selector
+    populateShowSelector(allShows);
+
     // Display all shows
     displayShows(allShows);
     showMatchCount(allShows.length, allShows.length);
+
+    // Show selector functionality
+    showSelector.addEventListener("change", () => {
+      const selectedShow = allShows.find(
+        (show) => String(show.id) === showSelector.value,
+      );
+
+      if (selectedShow) {
+        loadShow(selectedShow);
+      }
+    });
 
     // Search functionality for shows
     showSearch.addEventListener("input", () => {
@@ -103,6 +118,22 @@ async function setup() {
       "Sorry, we could not load the shows. Please try again later.";
     showsView.innerHTML =
       "<p>Sorry, we could not load the shows. Please try again later.</p>";
+  }
+}
+
+// Populate the show selector
+function populateShowSelector(showList) {
+  const selector = document.getElementById("showSelector");
+
+  selector.innerHTML = "";
+
+  for (const show of showList) {
+    const option = document.createElement("option");
+
+    option.value = show.id;
+    option.textContent = show.name;
+
+    selector.appendChild(option);
   }
 }
 
